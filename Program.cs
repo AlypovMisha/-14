@@ -1,4 +1,4 @@
-﻿using _10LabDll;
+using _10LabDll;
 using _12LabLibrary;
 using System;
 using System.Collections.Generic;
@@ -59,12 +59,12 @@ namespace Лабораторная_14
             Console.WriteLine("2. Вывести на экран все коллекции");
             Console.WriteLine("3. Вывести на экран машины определенного бренда (демонстрация Where LINQ)");
             Console.WriteLine("4. Найти одинаковые машины (демонстрация Intersect LINQ)");
-            Console.WriteLine("5. Найти автомобиль с максимальной ценой (демонстрация Max LINQ)");
+            Console.WriteLine("5. Найти автомобиль/и с максимальной ценой (демонстрация Max LINQ)");
             Console.WriteLine("6. Сгруппировать по марке (демонстрация Group By LINQ)");
             Console.WriteLine("7. Адрес доставки автомобилей (демонстрация Join LINQ)");
             Console.WriteLine("8. Вывести на экран машины определенного бренда (демонстрация Where методом расширения)");
             Console.WriteLine("9. Найти одинаковые машины (демонстрация Intersect методом расширения)");
-            Console.WriteLine("10. Найти автомобиль с максимальной ценой (демонстрация Max методом расширения)");
+            Console.WriteLine("10. Найти автомобиль/и с максимальной ценой (демонстрация Max методом расширения)");
             Console.WriteLine("11. Сгруппировать по марке (демонстрация Group By методом расширения)");
             Console.WriteLine("12. Адрес доставки автомобилей (демонстрация Join методом расширения)");
             Console.WriteLine("13. Вывести меню");
@@ -79,7 +79,7 @@ namespace Лабораторная_14
             Console.WriteLine("3. Вывести на экран машины определенного бренда (демонстрация Where LINQ)");
             Console.WriteLine("4. Посчитать количество желтых машин (демонстрация Count LINQ)");
             Console.WriteLine("5. Подсчитать сумму стоимостей всех автомобилей (демонстрация Sum LINQ)");
-            Console.WriteLine("6. Сгруппировать по мпрке (демонстрация Group By LINQ)");
+            Console.WriteLine("6. Сгруппировать по марке (демонстрация Group By LINQ)");
             Console.WriteLine("7. Вывести на экран машины определенного бренда (демонстрация Where методом расширения)");
             Console.WriteLine("8. Посчитать количество желтых машин (демонстрация Count методом расширения)");
             Console.WriteLine("9. Подсчитать сумму стоимостей всех автомобилей (демонстрация Sum методом расширения)");
@@ -100,75 +100,7 @@ namespace Лабораторная_14
                 switch (choice)
                 {
                     case "1":
-                        try
-                        {
-                            Console.Write("Введите количество автомобилей в цехах: ");
-                            carFactory.Clear();
-                            carFactory1.Clear();
-                            int countOfAuto = int.Parse(Console.ReadLine());
-                            List<Cars> carWorkShop = new List<Cars>(countOfAuto);
-                            List<Cars> psCarWorkShop = new List<Cars>(countOfAuto);
-                            List<Cars> trCarWorkShop = new List<Cars>(countOfAuto);
-                            List<Cars> ofrCarWorkShop = new List<Cars>(countOfAuto);
-                            List<Cars> carWorkShop1 = new List<Cars>(countOfAuto);
-                            List<Cars> psCarWorkShop1 = new List<Cars>(countOfAuto);
-                            List<Cars> trCarWorkShop1 = new List<Cars>(countOfAuto);
-                            List<Cars> ofrCarWorkShop1 = new List<Cars>(countOfAuto);
-                            for (int i = 0; i < countOfAuto; i++)
-                            {
-                                Cars car = new Cars();
-                                car.RandomInit();
-                                carWorkShop.Add(car);
-                                PassengerCar psCar = new PassengerCar();
-                                psCar.RandomInit();
-                                psCarWorkShop.Add(psCar);
-                                TruckCar truckCar = new TruckCar();
-                                truckCar.RandomInit();
-                                trCarWorkShop.Add(truckCar);
-                                OffRoadCar offRoadCar = new OffRoadCar();
-                                offRoadCar.RandomInit();
-                                ofrCarWorkShop.Add(offRoadCar);
-                            }
-                            for (int i = 0; i < countOfAuto; i++)
-                            {
-                                Cars car = new Cars();
-                                car.RandomInit();
-                                carWorkShop1.Add(car);
-                                PassengerCar psCar = new PassengerCar();
-                                psCar.RandomInit();
-                                psCarWorkShop1.Add(psCar);
-                                TruckCar truckCar = new TruckCar();
-                                truckCar.RandomInit();
-                                trCarWorkShop1.Add(truckCar);
-                                OffRoadCar offRoadCar = new OffRoadCar();
-                                offRoadCar.RandomInit();
-                                ofrCarWorkShop1.Add(offRoadCar);
-                            }
-                            //Добавляется автомобиль для метода Intersect
-                            Cars specialCar = new Cars();
-                            specialCar.RandomInit();
-                            carWorkShop.Add(specialCar);
-                            psCarWorkShop.Add(specialCar);
-                            trCarWorkShop.Add(specialCar);
-                            ofrCarWorkShop.Add(specialCar);
-                            carWorkShop1.Add(specialCar);
-                            psCarWorkShop1.Add(specialCar);
-                            trCarWorkShop1.Add(specialCar);
-                            ofrCarWorkShop1.Add(specialCar);
-                            carFactory.Enqueue(carWorkShop);
-                            carFactory.Enqueue(psCarWorkShop);
-                            carFactory.Enqueue(trCarWorkShop);
-                            carFactory.Enqueue(ofrCarWorkShop);
-                            carFactory1.Enqueue(carWorkShop1);
-                            carFactory1.Enqueue(psCarWorkShop1);
-                            carFactory1.Enqueue(trCarWorkShop1);
-                            carFactory1.Enqueue(ofrCarWorkShop1);
-                            Console.WriteLine("Коллекции сформированы!");
-                        }
-                        catch
-                        {
-                            Console.WriteLine("Вы не правильно ввели число, попробуйте снова.");
-                        }
+                        ProcessInputAndGenerateCars(carFactory, carFactory1);
                         break;
                     case "2":
                         if (carFactory.Count > 0)
@@ -192,7 +124,15 @@ namespace Лабораторная_14
                         {
                             Console.Write("Введите марку которую хотите найти: ");
                             string brand = Console.ReadLine();
-                            WhereDemonstrationLINQ(carFactory, brand);
+                            var result = WhereDemonstrationLINQ(carFactory, brand);
+                            if (result.Count() > 0)
+                            {
+                                foreach (var car in result) { Console.WriteLine(car.ToString()); }
+                            }
+                            else
+                            {
+                                Console.WriteLine("Такой марки нет в цехах");
+                            }
                         }
                         else
                             Console.WriteLine("Сначала сформируйте коллекции");
@@ -201,7 +141,9 @@ namespace Лабораторная_14
                         if (carFactory.Count > 0)
                         {
                             Console.WriteLine("\t\tОбщая машина");
-                            IntersectDemonstrationLINQ(carFactory, carFactory1);
+                            var cars = IntersectDemonstrationLINQ(carFactory, carFactory1);
+                            foreach (var car in cars)
+                            { Console.WriteLine(car.ToString()); }
                         }
                         else
                             Console.WriteLine("Сначала сформируйте коллекции");
@@ -209,8 +151,10 @@ namespace Лабораторная_14
                     case "5":
                         if (carFactory.Count > 0)
                         {
-                            Console.WriteLine("\t\tСамая дорогая машина на заводе");
-                            MaxDemonstrationLINQ(carFactory);
+                            Console.WriteLine("\t\tСамая(ые) дорогая(ие) машина(ы) на заводе");
+                            var exCar = MaxDemonstrationLINQ(carFactory);
+                            foreach (var car in exCar)
+                                Console.WriteLine($"Самый дорогой автомобиль: {car.ToString()}");
                         }
                         else
                             Console.WriteLine("Сначала сформируйте коллекции");
@@ -219,7 +163,18 @@ namespace Лабораторная_14
                         if (carFactory.Count > 0)
                         {
                             Console.WriteLine("\t\tГруппировка по марке");
-                            GroupByDemonstrationLINQ(carFactory);
+                            var result = GroupByDemonstrationLINQ(carFactory);
+                            foreach (var gr in result)
+                            {
+                                int i = 0;
+                                Console.WriteLine("\t\t" + gr.Key);
+                                foreach (var car in gr)
+                                {
+                                    i++;
+                                    Console.WriteLine(car.ToString());
+                                }
+                                Console.WriteLine($"Количество машин с маркой {gr.Key} в данной группе {i}");
+                            }
                         }
                         else
                             Console.WriteLine("Сначала сформируйте коллекции");
@@ -228,7 +183,11 @@ namespace Лабораторная_14
                         if (carFactory.Count > 0)
                         {
                             Console.WriteLine("\t\tАдрес доставки дилеру для каждой марки");
-                            JoinDemonstrationLINQ(carFactory);
+                            var result = JoinDemonstrationLINQ(carFactory);
+                            foreach (var gr in result)
+                            {
+                                Console.WriteLine(gr.ToString());
+                            }
                         }
                         else
                             Console.WriteLine("Сначала сформируйте коллекции");
@@ -238,7 +197,15 @@ namespace Лабораторная_14
                         {
                             Console.Write("Введите марку которую хотите найти: ");
                             string brand = Console.ReadLine();
-                            WhereDemonstrationExtension(carFactory, brand);
+                            var result = WhereDemonstrationExtension(carFactory, brand);
+                            if (result.Count() > 0)
+                            {
+                                foreach (var car in result) { Console.WriteLine(car.ToString()); }
+                            }
+                            else
+                            {
+                                Console.WriteLine("Такой марки нет в цехах");
+                            }
                         }
                         else
                             Console.WriteLine("Сначала сформируйте коллекции");
@@ -247,7 +214,9 @@ namespace Лабораторная_14
                         if (carFactory.Count > 0)
                         {
                             Console.WriteLine("\t\tОбщая машина");
-                            IntersectDemonstrationExtension(carFactory, carFactory1);
+                            var cars = IntersectDemonstrationExtension(carFactory, carFactory1);
+                            foreach (var car in cars)
+                            { Console.WriteLine(car.ToString()); }
                         }
                         else
                             Console.WriteLine("Сначала сформируйте коллекции");
@@ -255,8 +224,10 @@ namespace Лабораторная_14
                     case "10":
                         if (carFactory.Count > 0)
                         {
-                            Console.WriteLine("\t\tСамая дорогая машина на заводе");
-                            MaxDemonstrationExtension(carFactory);
+                            Console.WriteLine("\t\tСамая(ые) дорогая(ие) машина(ы) на заводе");
+                            var exCar = MaxDemonstrationExtension(carFactory);
+                            foreach (var car in exCar)
+                                Console.WriteLine($"Самый дорогой автомобиль: {car.ToString()}");
                         }
                         else
                             Console.WriteLine("Сначала сформируйте коллекции");
@@ -265,7 +236,18 @@ namespace Лабораторная_14
                         if (carFactory.Count > 0)
                         {
                             Console.WriteLine("\t\tГруппировка по марке");
-                            GroupByDemonstrationExtension(carFactory);
+                            var result = GroupByDemonstrationExtension(carFactory);
+                            foreach (var gr in result)
+                            {
+                                int i = 0;
+                                Console.WriteLine("\t\t" + gr.Key);
+                                foreach (var car in gr)
+                                {
+                                    i++;
+                                    Console.WriteLine(car.ToString());
+                                }
+                                Console.WriteLine($"Количество машин с маркой {gr.Key} в данной группе {i}");
+                            }
                         }
                         else
                             Console.WriteLine("Сначала сформируйте коллекции");
@@ -274,7 +256,11 @@ namespace Лабораторная_14
                         if (carFactory.Count > 0)
                         {
                             Console.WriteLine("\t\tАдрес доставки дилеру для каждой марки");
-                            JoinDemonstrationExtension(carFactory);
+                            var result = JoinDemonstrationExtension(carFactory);
+                            foreach (var gr in result)
+                            {
+                                Console.WriteLine(gr.ToString());
+                            }
                         }
                         else
                             Console.WriteLine("Сначала сформируйте коллекции");
@@ -340,7 +326,16 @@ namespace Лабораторная_14
                         {
                             Console.Write("Введите марку которую хотите найти: ");
                             string brand = Console.ReadLine();
-                            WhereDemonstrationLINQPart2(superHashTable, brand);
+                            var result = WhereDemonstrationLINQPart2(superHashTable, brand);
+                            if (result.Count() > 0)
+                            {
+                                foreach (var car in result) { Console.WriteLine(car.ToString()); }
+                            }
+                            else
+                            {
+                                Console.WriteLine("Такой марки нет в цехе");
+                            }
+
                         }
                         else
                         {
@@ -350,7 +345,15 @@ namespace Лабораторная_14
                     case "4":
                         if (superHashTable != null)
                         {
-                            CountDemonstrationLINQPart2(superHashTable);
+                            var result = CountDemonstrationLINQPart2(superHashTable);
+                            if (result > 0)
+                            {
+                                Console.WriteLine($"Количество желтых автомобилей: {result}");
+                            }
+                            else
+                            {
+                                Console.WriteLine("В цеху нет желтых автомобилей");
+                            }
                         }
                         else
                         {
@@ -360,7 +363,15 @@ namespace Лабораторная_14
                     case "5":
                         if (superHashTable != null)
                         {
-                            SumDemonstrationLINQPart2(superHashTable);
+                            var result = SumDemonstrationLINQPart2(superHashTable);
+                            if (result > 0)
+                            {
+                                Console.WriteLine($"Сумма стоимостей всех автомобилей: {result}");
+                            }
+                            else
+                            {
+                                Console.WriteLine("Стоимость равна 0");
+                            }
                         }
                         else
                         {
@@ -371,7 +382,18 @@ namespace Лабораторная_14
                         if (superHashTable != null)
                         {
                             Console.WriteLine("\t\tГруппировка по марке");
-                            GroupByDemonstrationLINQPart2(superHashTable);
+                            var result = GroupByDemonstrationLINQPart2(superHashTable);
+                            foreach (var gr in result)
+                            {
+                                int i = 0;
+                                Console.WriteLine("\t\t" + gr.Key);
+                                foreach (var car in gr)
+                                {
+                                    i++;
+                                    Console.WriteLine(car.ToString());
+                                }
+                                Console.WriteLine($"Количество машин с маркой {gr.Key} в данной группе {i}");
+                            }
                         }
                         else
                         {
@@ -383,7 +405,15 @@ namespace Лабораторная_14
                         {
                             Console.Write("Введите марку которую хотите найти: ");
                             string brand = Console.ReadLine();
-                            WhereDemonstrationExtensionPart2(superHashTable, brand);
+                            var result = WhereDemonstrationExtensionPart2(superHashTable, brand);
+                            if (result.Count() > 0)
+                            {
+                                foreach (var car in result) { Console.WriteLine(car.ToString()); }
+                            }
+                            else
+                            {
+                                Console.WriteLine("Такой марки нет в цехах");
+                            }
                         }
                         else
                         {
@@ -393,7 +423,15 @@ namespace Лабораторная_14
                     case "8":
                         if (superHashTable != null)
                         {
-                            CountDemonstrationExtensionPart2(superHashTable);
+                            var result = CountDemonstrationExtensionPart2(superHashTable);
+                            if (result > 0)
+                            {
+                                Console.WriteLine($"Количество желтых автомобилей: {result}");
+                            }
+                            else
+                            {
+                                Console.WriteLine("В цеху нет желтых автомобилей");
+                            }
                         }
                         else
                         {
@@ -403,7 +441,15 @@ namespace Лабораторная_14
                     case "9":
                         if (superHashTable != null)
                         {
-                            SumDemonstrationExtensionPart2(superHashTable);
+                            var result = SumDemonstrationExtensionPart2(superHashTable);
+                            if (result > 0)
+                            {
+                                Console.WriteLine($"Сумма стоимостей всех автомобилей: {result}");
+                            }
+                            else
+                            {
+                                Console.WriteLine("Стоимость равна 0");
+                            }
                         }
                         else
                         {
@@ -414,7 +460,18 @@ namespace Лабораторная_14
                         if (superHashTable != null)
                         {
                             Console.WriteLine("\t\tГруппировка по марке");
-                            GroupByDemonstrationExtensionPart2(superHashTable);
+                            var result = GroupByDemonstrationExtensionPart2(superHashTable);
+                            foreach (var gr in result)
+                            {
+                                int i = 0;
+                                Console.WriteLine("\t\t" + gr.Key);
+                                foreach (var car in gr)
+                                {
+                                    i++;
+                                    Console.WriteLine(car.ToString());
+                                }
+                                Console.WriteLine($"Количество машин с маркой {gr.Key} в данной группе {i}");
+                            }
                         }
                         else
                         {
@@ -435,155 +492,108 @@ namespace Лабораторная_14
             }
         }
 
-        public static void WhereDemonstrationLINQ(Queue<List<Cars>> carFactory, string brand)
+        public static IEnumerable<Cars> WhereDemonstrationLINQ(Queue<List<Cars>> carFactory, string brand)
         {
             var result = from workshop in carFactory
                          from car in workshop
                          where car.Brand == brand
                          select car;
-            if (result.Count() > 0)
-            {
-                foreach (var car in result) { Console.WriteLine(car.ToString()); }
-            }
-            else
-            {
-                Console.WriteLine("Такой марки нет в цехах");
-            }
+            return result;
         }
 
-        public static void WhereDemonstrationLINQPart2(SuperHashTable<Cars> carFactory, string brand)
+        public static IEnumerable<Cars> WhereDemonstrationLINQPart2(SuperHashTable<Cars> carFactory, string brand)
         {
             var result = from car in carFactory
                          where car.Brand == brand
                          select car;
-            if (result.Count() > 0)
-            {
-                foreach (var car in result) { Console.WriteLine(car.ToString()); }
-            }
-            else
-            {
-                Console.WriteLine("Такой марки нет в цехе");
-            }
+            return result;
         }
 
-        public static void WhereDemonstrationExtension(Queue<List<Cars>> carFactory, string brand)
+        public static IEnumerable<Cars> WhereDemonstrationExtension(Queue<List<Cars>> carFactory, string brand)
         {
             var result = carFactory
                 .SelectMany(workshop => workshop)
                 .Where(car => car.Brand == brand);
-            if (result.Count() > 0)
-            {
-                foreach (var car in result) { Console.WriteLine(car.ToString()); }
-            }
-            else
-            {
-                Console.WriteLine("Такой марки нет в цехах");
-            }
+            return result;
         }
 
-        public static void WhereDemonstrationExtensionPart2(SuperHashTable<Cars> carFactory, string brand)
+        public static IEnumerable<Cars> WhereDemonstrationExtensionPart2(SuperHashTable<Cars> carFactory, string brand)
         {
             var result = carFactory.Where(car => car.Brand == brand);
-            if (result.Count() > 0)
-            {
-                foreach (var car in result) { Console.WriteLine(car.ToString()); }
-            }
-            else
-            {
-                Console.WriteLine("Такой марки нет в цехах");
-            }
+            return result;
         }
 
-        public static void IntersectDemonstrationLINQ(Queue<List<Cars>> carFactory, Queue<List<Cars>> carFactory1)
+        public static IEnumerable<Cars> IntersectDemonstrationLINQ(Queue<List<Cars>> carFactory, Queue<List<Cars>> carFactory1)
         {
             IEnumerable<Cars> cars = (from workshops in carFactory
                                       from car in workshops
                                       select car).Intersect(from workshops1 in carFactory1 from car1 in workshops1 select car1);
 
-            foreach (var car in cars)
-            { Console.WriteLine(car.ToString()); }
+            return cars;
         }
 
-        public static void IntersectDemonstrationExtension(Queue<List<Cars>> carFactory, Queue<List<Cars>> carFactory1)
+        public static IEnumerable<Cars> IntersectDemonstrationExtension(Queue<List<Cars>> carFactory, Queue<List<Cars>> carFactory1)
         {
             var cars = carFactory
            .SelectMany(workshop => workshop)
            .Intersect(carFactory1.SelectMany(workshop => workshop));
 
-            foreach (var car in cars)
-            { Console.WriteLine(car.ToString()); }
+            return cars;
         }
 
-        public static void MaxDemonstrationLINQ(Queue<List<Cars>> carFactory)
+        public static IEnumerable<Cars> MaxDemonstrationLINQ(Queue<List<Cars>> carFactory)
         {
+            var maxCost = (from workshop in carFactory
+                           from car in workshop
+                           select car.Cost).Max();
             var exCar = (from workshop in carFactory
                          from car in workshop
-                         select car).Max();
-            Console.WriteLine($"Самый дорогой автомобиль: {exCar}");
+                         where car.Cost == maxCost
+                         select car);
+            return exCar;
         }
 
-        public static void MaxDemonstrationExtension(Queue<List<Cars>> carFactory)
+        public static IEnumerable<Cars> MaxDemonstrationExtension(Queue<List<Cars>> carFactory)
         {
-            var exCar = carFactory.SelectMany(workshop => workshop).Max();
-            Console.WriteLine($"Самый дорогой автомобиль: {exCar}");
+            var maxCost = carFactory
+                .SelectMany(workshop => workshop)
+                .Max(car => car.Cost);
+
+            var exCars = carFactory
+                .SelectMany(workshop => workshop)
+                .Where(car => car.Cost == maxCost);
+            return exCars;
         }
 
-        public static void GroupByDemonstrationLINQ(Queue<List<Cars>> carFactory)
+        public static IEnumerable<IGrouping<string, Cars>> GroupByDemonstrationLINQ(Queue<List<Cars>> carFactory)
         {
             var result = from workshop in carFactory
                          from car in workshop
                          group car by car.Brand;
-            foreach (var gr in result)
-            {
-                Console.WriteLine("\t\t" + gr.Key);
-                foreach (var car in gr)
-                {
-                    Console.WriteLine(car.ToString());
-                }
-            }
+
+            return result;
         }
 
-        public static void GroupByDemonstrationExtension(Queue<List<Cars>> carFactory)
+        public static IEnumerable<IGrouping<string, Cars>> GroupByDemonstrationExtension(Queue<List<Cars>> carFactory)
         {
             var result = carFactory.SelectMany(workshops => workshops).GroupBy(car => car.Brand);
-            foreach (var gr in result)
-            {
-                Console.WriteLine("\t\t" + gr.Key);
-                foreach (var car in gr)
-                {
-                    Console.WriteLine(car.ToString());
-                }
-            }
+            return result;
         }
 
-        public static void GroupByDemonstrationLINQPart2(SuperHashTable<Cars> carFactory)
+        public static IEnumerable<IGrouping<string, Cars>> GroupByDemonstrationLINQPart2(SuperHashTable<Cars> carFactory)
         {
             var result = from car in carFactory
                          group car by car.Brand;
-            foreach (var gr in result)
-            {
-                Console.WriteLine("\t\t" + gr.Key);
-                foreach (var car in gr)
-                {
-                    Console.WriteLine(car.ToString());
-                }
-            }
+            return result;
         }
 
-        public static void GroupByDemonstrationExtensionPart2(SuperHashTable<Cars> carFactory)
+        public static IEnumerable<IGrouping<string, Cars>> GroupByDemonstrationExtensionPart2(SuperHashTable<Cars> carFactory)
         {
             var result = carFactory.GroupBy(car => car.Brand);
-            foreach (var gr in result)
-            {
-                Console.WriteLine("\t\t" + gr.Key);
-                foreach (var car in gr)
-                {
-                    Console.WriteLine(car.ToString());
-                }
-            }
+            return result;
         }
 
-        public static void JoinDemonstrationLINQ(Queue<List<Cars>> carFactory)
+        public static IEnumerable<CarWithAddress> JoinDemonstrationLINQ(Queue<List<Cars>> carFactory)
         {
             List<Customer> orders = new List<Customer>
             {
@@ -602,14 +612,11 @@ namespace Лабораторная_14
             var result = (from workshop in carFactory
                           from car in workshop
                           join t in orders on car.Brand equals t.Brand
-                          select new { car.Brand, Address = t.City + " " + t.Address }).Distinct();
-            foreach (var gr in result)
-            {
-                Console.WriteLine(gr.ToString());
-            }
+                          select new CarWithAddress { Brand = car.Brand, Address = t.City + " " + t.Address }).Distinct();
+            return result;
         }
 
-        public static void JoinDemonstrationExtension(Queue<List<Cars>> carFactory)
+        public static IEnumerable<CarWithAddress> JoinDemonstrationExtension(Queue<List<Cars>> carFactory)
         {
             List<Customer> orders = new List<Customer>
             {
@@ -628,69 +635,113 @@ namespace Лабораторная_14
             var result = carFactory
                         .SelectMany(workshop => workshop)
                         .Join(orders, car => car.Brand, order => order.Brand,
-                        (car, order) => new { car.Brand, Address = order.City + " " + order.Address })
+                        (car, order) => new CarWithAddress { Brand = car.Brand, Address = order.City + " " + order.Address })
                         .Distinct();
-            foreach (var gr in result)
-            {
-                Console.WriteLine(gr.ToString());
-            }
+            return result;
         }
 
-        public static void CountDemonstrationLINQPart2(SuperHashTable<Cars> carFactory)
+        public static int CountDemonstrationLINQPart2(SuperHashTable<Cars> carFactory)
         {
             var result = (from car in carFactory
                           where car.Color == "Yellow"
                           select car).Count();
-            if (result > 0)
-            {
-                Console.WriteLine($"Количество желтых автомобилей: {result}");
-            }
-            else
-            {
-                Console.WriteLine("В цеху нет желтых автомобилей");
-            }
+            return result;
         }
 
-        public static void CountDemonstrationExtensionPart2(SuperHashTable<Cars> carFactory)
+        public static int CountDemonstrationExtensionPart2(SuperHashTable<Cars> carFactory)
         {
             var result = carFactory
                         .Where(car => car.Color == "Yellow")
                         .Count();
-            if (result > 0)
-            {
-                Console.WriteLine($"Количество желтых автомобилей: {result}");
-            }
-            else
-            {
-                Console.WriteLine("В цеху нет желтых автомобилей");
-            }
+            return result;
+
         }
 
-        public static void SumDemonstrationLINQPart2(SuperHashTable<Cars> carFactory)
+        public static int SumDemonstrationLINQPart2(SuperHashTable<Cars> carFactory)
         {
             var result = (from car in carFactory
                           select car.Cost).Sum();
-            if (result > 0)
+            return result;
+
+        }
+
+        public static int SumDemonstrationExtensionPart2(SuperHashTable<Cars> carFactory)
+        {
+            var result = carFactory.Sum(car => car.Cost);
+            return result;
+        }
+
+
+        private static void ProcessInputAndGenerateCars(Queue<List<Cars>> carFactory, Queue<List<Cars>> carFactory1)
+        {
+            try
             {
-                Console.WriteLine($"Сумма стоимостей всех автомобилей: {result}");
+                Console.Write("Введите количество автомобилей в цехах: ");
+                carFactory.Clear();
+                carFactory1.Clear();
+
+                int countOfAuto = int.Parse(Console.ReadLine());
+
+                var workshops = GenerateWorkshops(countOfAuto);
+                var workshops1 = GenerateWorkshops(countOfAuto);
+
+                // Добавляется автомобиль для метода Intersect
+                var specialCar = new Cars();
+                specialCar.RandomInit();
+                AddSpecialCarToWorkshops(workshops, specialCar);
+                AddSpecialCarToWorkshops(workshops1, specialCar);
+
+                EnqueueWorkshops(carFactory, workshops);
+                EnqueueWorkshops(carFactory1, workshops1);
+
+                Console.WriteLine("Коллекции сформированы!");
             }
-            else
+            catch (Exception ex)
             {
-                Console.WriteLine("Стоимость равна 0");
+                Console.WriteLine($"Произошла ошибка: {ex.Message}");
             }
         }
 
-        public static void SumDemonstrationExtensionPart2(SuperHashTable<Cars> carFactory)
+        private static List<List<Cars>> GenerateWorkshops(int countOfAuto)
         {
-            var result = carFactory.Sum(car => car.Cost);
-            if (result > 0)
+            var carWorkShop = new List<Cars>(countOfAuto);
+            var psCarWorkShop = new List<Cars>(countOfAuto);
+            var trCarWorkShop = new List<Cars>(countOfAuto);
+            var ofrCarWorkShop = new List<Cars>(countOfAuto);
+
+            for (int i = 0; i < countOfAuto; i++)
             {
-                Console.WriteLine($"Сумма стоимостей всех автомобилей: {result}");
+                carWorkShop.Add(CreateRandomCar<Cars>());
+                psCarWorkShop.Add(CreateRandomCar<PassengerCar>());
+                trCarWorkShop.Add(CreateRandomCar<TruckCar>());
+                ofrCarWorkShop.Add(CreateRandomCar<OffRoadCar>());
             }
-            else
+
+            return new List<List<Cars>> { carWorkShop, psCarWorkShop, trCarWorkShop, ofrCarWorkShop };
+        }
+
+        private static T CreateRandomCar<T>() where T : Cars, new()
+        {
+            var car = new T();
+            car.RandomInit();
+            return car;
+        }
+
+        private static void AddSpecialCarToWorkshops(List<List<Cars>> workshops, Cars specialCar)
+        {
+            foreach (var workshop in workshops)
             {
-                Console.WriteLine("Стоимость равна 0");
+                workshop.Add(specialCar);
+            }
+        }
+
+        private static void EnqueueWorkshops(Queue<List<Cars>> carFactory, List<List<Cars>> workshops)
+        {
+            foreach (var workshop in workshops)
+            {
+                carFactory.Enqueue(workshop);
             }
         }
     }
 }
+
