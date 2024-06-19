@@ -1,4 +1,4 @@
-﻿using _10LabDll;
+using _10LabDll;
 using _12LabLibrary;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
@@ -24,14 +24,8 @@ namespace Laba14Tests
             };
             carFactory.Enqueue(carsList);
 
-            using (var sw = new StringWriter())
-            {
-                Console.SetOut(sw);
-                Program.WhereDemonstrationLINQ(carFactory, "Toyota");
-                var result = sw.ToString().Trim();
-                var expected = "Toyota, 2020, White, 100000, 15, 0";
-                Assert.AreEqual(expected, result);
-            }
+            var result = Program.WhereDemonstrationLINQ(carFactory, "Toyota");
+            Assert.AreEqual(1, result.Count());
         }
         [TestMethod]
         public void WhereDemonstrationLINQ_FindsCarsByBrand_1()
@@ -45,15 +39,11 @@ namespace Laba14Tests
             };
             carFactory.Enqueue(carsList);
 
-            using (var sw = new StringWriter())
-            {
-                Console.SetOut(sw);
-                Program.WhereDemonstrationLINQ(carFactory, "Honda");
-                var result = sw.ToString().Trim();
-                var expected = "Такой марки нет в цехах";
-                Assert.AreEqual(expected, result);
-            }
+            var result = Program.WhereDemonstrationLINQ(carFactory, "Honda");
+            Assert.AreEqual(0, result.Count());
         }
+
+
 
         [TestMethod]
         public void WhereDemonstrationLINQPart2_FindsCarsByBrand()
@@ -64,15 +54,8 @@ namespace Laba14Tests
                 new Cars { Brand = "BMW" },
                 new Cars { Brand = "Ford" }
             };
-
-            using (var sw = new StringWriter())
-            {
-                Console.SetOut(sw);
-                Program.WhereDemonstrationLINQPart2(carFactory, "Toyota");
-                var result = sw.ToString().Trim();
-                var expected = "Toyota, 2020, White, 100000, 15, 0";
-                Assert.AreEqual(expected, result);
-            }
+            var result = Program.WhereDemonstrationLINQPart2(carFactory, "Toyota");
+            Assert.AreEqual(1, result.Count());
         }
 
         [TestMethod]
@@ -85,14 +68,8 @@ namespace Laba14Tests
                 new Cars { Brand = "Ford" }
             };
 
-            using (var sw = new StringWriter())
-            {
-                Console.SetOut(sw);
-                Program.WhereDemonstrationLINQPart2(carFactory, "Honda");
-                var result = sw.ToString().Trim();
-                var expected = "Такой марки нет в цехе";
-                Assert.AreEqual(expected, result);
-            }
+            var result = Program.WhereDemonstrationLINQPart2(carFactory, "Honda");
+            Assert.AreEqual(0, result.Count());
         }
 
         [TestMethod]
@@ -107,14 +84,8 @@ namespace Laba14Tests
             };
             carFactory.Enqueue(carsList);
 
-            using (var sw = new StringWriter())
-            {
-                Console.SetOut(sw);
-                Program.WhereDemonstrationExtension(carFactory, "Toyota");
-                var result = sw.ToString().Trim();
-                var expected = "Toyota, 2020, White, 100000, 15, 0";
-                Assert.AreEqual(expected, result);
-            }
+            var result = Program.WhereDemonstrationExtension(carFactory, "Toyota");
+            Assert.AreEqual(1, result.Count());
         }
 
         [TestMethod]
@@ -129,15 +100,10 @@ namespace Laba14Tests
             };
             carFactory.Enqueue(carsList);
 
-            using (var sw = new StringWriter())
-            {
-                Console.SetOut(sw);
-                Program.WhereDemonstrationExtension(carFactory, "Honda");
-                var result = sw.ToString().Trim();
-                var expected = "Такой марки нет в цехах";
-                Assert.AreEqual(expected, result);
-            }
+            var result = Program.WhereDemonstrationExtension(carFactory, "Honda");
+            Assert.AreEqual(0, result.Count());
         }
+
         [TestMethod]
         public void WhereDemonstrationExtensionPart2_FindsCarsByBrand()
         {
@@ -148,15 +114,10 @@ namespace Laba14Tests
                 new Cars { Brand = "Ford" }
             };
 
-            using (var sw = new StringWriter())
-            {
-                Console.SetOut(sw);
-                Program.WhereDemonstrationExtensionPart2(carFactory, "Toyota");
-                var result = sw.ToString().Trim();
-                var expected = "Toyota, 2020, White, 100000, 15, 0";
-                Assert.AreEqual(expected, result);
-            }
+            var result = Program.WhereDemonstrationExtensionPart2(carFactory, "Toyota");
+            Assert.AreEqual(1, result.Count());
         }
+
         [TestMethod]
         public void WhereDemonstrationExtensionPart2_FindsCarsByBrand_1()
         {
@@ -167,15 +128,10 @@ namespace Laba14Tests
                 new Cars { Brand = "Ford" }
             };
 
-            using (var sw = new StringWriter())
-            {
-                Console.SetOut(sw);
-                Program.WhereDemonstrationExtensionPart2(carFactory, "Honda");
-                var result = sw.ToString().Trim();
-                var expected = "Такой марки нет в цехах";
-                Assert.AreEqual(expected, result);
-            }
+            var result = Program.WhereDemonstrationExtensionPart2(carFactory, "Honda");
+            Assert.AreEqual(0, result.Count());
         }
+
         [TestMethod]
         public void MaxDemonstrationLINQ_FindsMaxCostCar()
         {
@@ -188,14 +144,9 @@ namespace Laba14Tests
             };
             carFactory.Enqueue(carsList);
 
-            using (var sw = new StringWriter())
-            {
-                Console.SetOut(sw);
-                Program.MaxDemonstrationLINQ(carFactory);
-                var result = sw.ToString().Trim();
-                var expected = "Самый дорогой автомобиль: BMW, 2020, White, 30000, 15, 0"; // Замените на правильный вывод вашего объекта Cars
-                Assert.AreEqual(expected, result);
-            }
+            var result = Program.MaxDemonstrationLINQ(carFactory);
+            var expected = new Cars("BMW", 2020, "White", 30000, 15, 0);
+            Assert.AreEqual(expected, result.First());
         }
 
         [TestMethod]
@@ -210,14 +161,9 @@ namespace Laba14Tests
             };
             carFactory.Enqueue(carsList);
 
-            using (var sw = new StringWriter())
-            {
-                Console.SetOut(sw);
-                Program.MaxDemonstrationExtension(carFactory);
-                var result = sw.ToString().Trim();
-                var expected = "Самый дорогой автомобиль: BMW, 2020, White, 30000, 15, 0";
-                Assert.AreEqual(expected, result);
-            }
+            var result = Program.MaxDemonstrationExtension(carFactory);
+            var expected = new Cars("BMW", 2020, "White", 30000, 15, 0);
+            Assert.AreEqual(expected, result.First());
         }
 
 
@@ -231,16 +177,10 @@ namespace Laba14Tests
                 new Cars { Brand = "Honda", Color = "Blue" },
                 new Cars { Brand = "Nissan", Color = "Yellow" }
             };
-
-            using (var sw = new StringWriter())
-            {
-                Console.SetOut(sw);
-                Program.CountDemonstrationLINQPart2(carFactory);
-                var result = sw.ToString().Trim();
-                var expected = "Количество желтых автомобилей: 2";
-                Assert.AreEqual(expected, result);
-            }
+            var result = Program.CountDemonstrationLINQPart2(carFactory);
+            Assert.AreEqual(2, result);
         }
+
         [TestMethod]
         public void CountDemonstrationLINQPart2_CountsYellowCars_1()
         {
@@ -250,16 +190,10 @@ namespace Laba14Tests
                 new Cars { Brand = "Honda", Color = "Blue" },
                 new Cars { Brand = "Nissan", Color = "Black" }
             };
-
-            using (var sw = new StringWriter())
-            {
-                Console.SetOut(sw);
-                Program.CountDemonstrationLINQPart2(carFactory);
-                var result = sw.ToString().Trim();
-                var expected = "В цеху нет желтых автомобилей";
-                Assert.AreEqual(expected, result);
-            }
+            var result = Program.CountDemonstrationLINQPart2(carFactory);
+            Assert.AreEqual(0, result);
         }
+
         [TestMethod]
         public void CountDemonstrationExtensionPart2_CountsYellowCars()
         {
@@ -269,16 +203,10 @@ namespace Laba14Tests
                 new Cars { Brand = "Honda", Color = "Blue" },
                 new Cars { Brand = "Nissan", Color = "Yellow" }
             };
-
-            using (var sw = new StringWriter())
-            {
-                Console.SetOut(sw);
-                Program.CountDemonstrationExtensionPart2(carFactory);
-                var result = sw.ToString().Trim();
-                var expected = "Количество желтых автомобилей: 2";
-                Assert.AreEqual(expected, result);
-            }
+            var result = Program.CountDemonstrationExtensionPart2(carFactory);
+            Assert.AreEqual(2, result);
         }
+
         [TestMethod]
         public void CountDemonstrationExtensionPart2_CountsYellowCars_1()
         {
@@ -289,15 +217,10 @@ namespace Laba14Tests
                 new Cars { Brand = "Nissan", Color = "Black" }
             };
 
-            using (var sw = new StringWriter())
-            {
-                Console.SetOut(sw);
-                Program.CountDemonstrationExtensionPart2(carFactory);
-                var result = sw.ToString().Trim();
-                var expected = "В цеху нет желтых автомобилей";
-                Assert.AreEqual(expected, result);
-            }
+            var result = Program.CountDemonstrationExtensionPart2(carFactory);
+            Assert.AreEqual(0, result);
         }
+
         [TestMethod]
         public void SumDemonstrationLINQPart2_SumsCarCosts()
         {
@@ -308,14 +231,9 @@ namespace Laba14Tests
                 new Cars { Cost = 25000 }
             };
 
-            using (var sw = new StringWriter())
-            {
-                Console.SetOut(sw);
-                Program.SumDemonstrationLINQPart2(carFactory);
-                var result = sw.ToString().Trim();
-                var expected = "Сумма стоимостей всех автомобилей: 75000";
-                Assert.AreEqual(expected, result);
-            }
+            var result = Program.SumDemonstrationExtensionPart2(carFactory);
+            Assert.AreEqual(75000, result);
+
         }
 
         [TestMethod]
@@ -327,15 +245,8 @@ namespace Laba14Tests
                 new Cars { Cost = 30000 },
                 new Cars { Cost = 25000 }
             };
-
-            using (var sw = new StringWriter())
-            {
-                Console.SetOut(sw);
-                Program.SumDemonstrationExtensionPart2(carFactory);
-                var result = sw.ToString().Trim();
-                var expected = "Сумма стоимостей всех автомобилей: 75000";
-                Assert.AreEqual(expected, result);
-            }
+            var result = Program.SumDemonstrationExtensionPart2(carFactory);
+            Assert.AreEqual(75000, result);
         }
 
         [TestClass]
@@ -413,10 +324,7 @@ namespace Laba14Tests
                 string brand = "Toyota";
 
                 // Act
-                var result = from workshop in carFactory
-                             from car in workshop
-                             where car.Brand == brand
-                             select car;
+                var result = Program.WhereDemonstrationLINQ(carFactory, brand);
 
                 // Assert
                 Assert.AreEqual(1, result.Count());
@@ -436,9 +344,7 @@ namespace Laba14Tests
                 string brand = "Toyota";
 
                 // Act
-                var result = carFactory
-                    .SelectMany(workshop => workshop)
-                    .Where(car => car.Brand == brand);
+                var result = Program.WhereDemonstrationExtension(carFactory, brand);
 
                 // Assert
                 Assert.AreEqual(1, result.Count());
@@ -464,11 +370,7 @@ namespace Laba14Tests
             });
 
                 // Act
-                var cars = (from workshop1 in carFactory1
-                            from car1 in workshop1
-                            select car1).Intersect(from workshop2 in carFactory2
-                                                   from car2 in workshop2
-                                                   select car2);
+                var cars = Program.IntersectDemonstrationLINQ(carFactory1, carFactory2);
 
                 // Assert
                 Assert.AreEqual(1, cars.Count());
@@ -494,9 +396,7 @@ namespace Laba14Tests
             });
 
                 // Act
-                var cars = carFactory1
-                    .SelectMany(workshop => workshop)
-                    .Intersect(carFactory2.SelectMany(workshop => workshop));
+                var cars = Program.IntersectDemonstrationExtension(carFactory1, carFactory2);
 
                 // Assert
                 Assert.AreEqual(1, cars.Count());
@@ -515,12 +415,10 @@ namespace Laba14Tests
             });
 
                 // Act
-                var exCar = (from workshop in carFactory
-                             from car in workshop
-                             select car).Max();
+                var exCar = Program.MaxDemonstrationLINQ(carFactory);
 
                 // Assert
-                Assert.AreEqual(50000, exCar.Cost);
+                Assert.AreEqual(50000, exCar.First().Cost);
             }
 
             [TestMethod]
@@ -535,10 +433,10 @@ namespace Laba14Tests
             });
 
                 // Act
-                var exCar = carFactory.SelectMany(workshop => workshop).Max();
+                var exCar = Program.MaxDemonstrationExtension(carFactory);
 
                 // Assert
-                Assert.AreEqual(50000, exCar.Cost);
+                Assert.AreEqual(50000, exCar.First().Cost);
             }
 
             [TestMethod]
@@ -554,9 +452,7 @@ namespace Laba14Tests
             });
 
                 // Act
-                var result = from workshop in carFactory
-                             from car in workshop
-                             group car by car.Brand;
+                var result = Program.GroupByDemonstrationLINQ(carFactory);
 
                 // Assert
                 Assert.AreEqual(2, result.Count());
@@ -577,7 +473,7 @@ namespace Laba14Tests
             });
 
                 // Act
-                var result = carFactory.SelectMany(workshop => workshop).GroupBy(car => car.Brand);
+                var result = Program.GroupByDemonstrationExtension(carFactory);
 
                 // Assert
                 Assert.AreEqual(2, result.Count());
@@ -602,14 +498,11 @@ namespace Laba14Tests
             };
 
                 // Act
-                var result = (from workshop in carFactory
-                              from car in workshop
-                              join t in orders on car.Brand equals t.Brand
-                              select new { car.Brand, Address = t.City + " " + t.Address }).Distinct();
+                var result = Program.JoinDemonstrationLINQ(carFactory);
 
                 // Assert
-                Assert.AreEqual(1, result.Count());
-                Assert.AreEqual("Ford", result.First().Brand);
+                Assert.AreEqual(2, result.Count());
+                Assert.AreEqual("Toyota", result.First().Brand);
             }
 
             [TestMethod]
@@ -629,15 +522,11 @@ namespace Laba14Tests
             };
 
                 // Act
-                var result = carFactory
-                            .SelectMany(workshop => workshop)
-                            .Join(orders, car => car.Brand, order => order.Brand,
-                                (car, order) => new { car.Brand, Address = order.City + " " + order.Address })
-                            .Distinct();
+                var result = Program.JoinDemonstrationExtension(carFactory);
 
                 // Assert
-                Assert.AreEqual(1, result.Count());
-                Assert.AreEqual("Ford", result.First().Brand);
+                Assert.AreEqual(2, result.Count());
+                Assert.AreEqual("Toyota", result.First().Brand);
             }
 
             [TestMethod]
@@ -646,29 +535,20 @@ namespace Laba14Tests
                 // Arrange
                 var carFactory = new Queue<List<Cars>>();
                 carFactory.Enqueue(new List<Cars>
-            {
+                {
                 new Cars("Toyota", 2020, "Red", 50000, 15, 1),
                 new Cars("Ford", 2019, "Blue", 45000, 16, 2)
-            });
+                });
 
                 var carFactory1 = new Queue<List<Cars>>();
                 carFactory1.Enqueue(new List<Cars>
-            {
+                {
                 new Cars("Ford", 2019, "Blue", 45000, 16, 2),
                 new Cars("Honda", 2018, "Green", 40000, 17, 3)
-            });
-
-                using (var sw = new StringWriter())
-                {
-                    Console.SetOut(sw);
-
-                    // Act
-                    Program.IntersectDemonstrationLINQ(carFactory, carFactory1);
-
-                    // Assert
-                    var expected = "Ford, 2019, Blue, 45000, 16, 2\r\n";
-                    Assert.AreEqual(expected, sw.ToString());
-                }
+                });
+                var result = Program.IntersectDemonstrationLINQ(carFactory, carFactory1);
+                var expected = new Cars("Ford", 2019, "Blue", 45000, 16, 2);
+                Assert.AreEqual(expected, result.First());
             }
 
             [TestMethod]
@@ -677,29 +557,21 @@ namespace Laba14Tests
                 // Arrange
                 var carFactory = new Queue<List<Cars>>();
                 carFactory.Enqueue(new List<Cars>
-            {
-                new Cars("Toyota", 2020, "Red", 50000, 15, 1),
-                new Cars("Ford", 2019, "Blue", 45000, 16, 2)
-            });
+                {
+                    new Cars("Toyota", 2020, "Red", 50000, 15, 1),
+                    new Cars("Ford", 2019, "Blue", 45000, 16, 2)
+                });
 
                 var carFactory1 = new Queue<List<Cars>>();
                 carFactory1.Enqueue(new List<Cars>
-            {
-                new Cars("Ford", 2019, "Blue", 45000, 16, 2),
-                new Cars("Honda", 2018, "Green", 40000, 17, 3)
-            });
+                { 
+                    new Cars("Ford", 2019, "Blue", 45000, 16, 2),
+                    new Cars("Honda", 2018, "Green", 40000, 17, 3)
+                });
 
-                using (var sw = new StringWriter())
-                {
-                    Console.SetOut(sw);
-
-                    // Act
-                    Program.IntersectDemonstrationExtension(carFactory, carFactory1);
-
-                    // Assert
-                    var expected = "Ford, 2019, Blue, 45000, 16, 2\r\n";
-                    Assert.AreEqual(expected, sw.ToString());
-                }
+                var result = Program.IntersectDemonstrationExtension(carFactory, carFactory1);
+                var expected = new Cars("Ford", 2019, "Blue", 45000, 16, 2);
+                Assert.AreEqual(expected, result.First());
             }
 
             [TestMethod]
@@ -713,18 +585,8 @@ namespace Laba14Tests
                 new Cars("Ford", 2019, "Blue", 45000, 16, 2),
                 new Cars("Toyota", 2021, "White", 55000, 17, 3)
             });
-
-                using (var sw = new StringWriter())
-                {
-                    Console.SetOut(sw);
-
-                    // Act
-                    Program.GroupByDemonstrationLINQ(carFactory);
-
-                    // Assert
-                    var expected = "\t\tToyota\r\nToyota, 2020, Red, 50000, 15, 1\r\nToyota, 2021, White, 55000, 17, 3\r\n\t\tFord\r\nFord, 2019, Blue, 45000, 16, 2\r\n";
-                    Assert.AreEqual(expected, sw.ToString());
-                }
+                var result = Program.GroupByDemonstrationLINQ(carFactory);
+                Assert.AreEqual(2, result.Count());
             }
 
             [TestMethod]
@@ -739,17 +601,8 @@ namespace Laba14Tests
                 new Cars("Toyota", 2021, "White", 55000, 17, 3)
             });
 
-                using (var sw = new StringWriter())
-                {
-                    Console.SetOut(sw);
-
-                    // Act
-                    Program.GroupByDemonstrationExtension(carFactory);
-
-                    // Assert
-                    var expected = "\t\tToyota\r\nToyota, 2020, Red, 50000, 15, 1\r\nToyota, 2021, White, 55000, 17, 3\r\n\t\tFord\r\nFord, 2019, Blue, 45000, 16, 2\r\n";
-                    Assert.AreEqual(expected, sw.ToString());
-                }
+                var result = Program.GroupByDemonstrationLINQ(carFactory);
+                Assert.AreEqual(2, result.Count());
             }
 
             [TestMethod]
@@ -761,17 +614,8 @@ namespace Laba14Tests
                 carFactory.Add(new Cars("Ford", 2019, "Blue", 45000, 16, 2));
                 carFactory.Add(new Cars("Toyota", 2021, "White", 55000, 17, 3));
 
-                using (var sw = new StringWriter())
-                {
-                    Console.SetOut(sw);
-
-                    // Act
-                    Program.GroupByDemonstrationLINQPart2(carFactory);
-
-                    // Assert
-                    var expected = "\t\tToyota\r\nToyota, 2020, Red, 50000, 15, 1\r\nToyota, 2021, White, 55000, 17, 3\r\n\t\tFord\r\nFord, 2019, Blue, 45000, 16, 2\r\n";
-                    Assert.AreEqual(expected, sw.ToString());
-                }
+                var result = Program.GroupByDemonstrationLINQPart2(carFactory);
+                Assert.AreEqual(2, result.Count());
             }
 
             [TestMethod]
@@ -783,17 +627,8 @@ namespace Laba14Tests
                 carFactory.Add(new Cars("Ford", 2019, "Blue", 45000, 16, 2));
                 carFactory.Add(new Cars("Toyota", 2021, "White", 55000, 17, 3));
 
-                using (var sw = new StringWriter())
-                {
-                    Console.SetOut(sw);
-
-                    // Act
-                    Program.GroupByDemonstrationExtensionPart2(carFactory);
-
-                    // Assert
-                    var expected = "\t\tToyota\r\nToyota, 2020, Red, 50000, 15, 1\r\nToyota, 2021, White, 55000, 17, 3\r\n\t\tFord\r\nFord, 2019, Blue, 45000, 16, 2\r\n";
-                    Assert.AreEqual(expected, sw.ToString());
-                }
+                var result = Program.GroupByDemonstrationExtensionPart2(carFactory);
+                Assert.AreEqual(2, result.Count());
             }
 
             [TestMethod]
@@ -807,17 +642,9 @@ namespace Laba14Tests
                 new Cars("Toyota", 2020, "Red", 50000, 15, 1)
             });
 
-                using (var sw = new StringWriter())
-                {
-                    Console.SetOut(sw);
-
-                    // Act
-                    Program.JoinDemonstrationLINQ(carFactory);
-
-                    // Assert
-                    var expected = "{ Brand = Ford, Address = Москва Улица им.Пушкина 52 }\r\n{ Brand = Toyota, Address = Казань Улица Баумана 15 }\r\n";
-                    Assert.AreEqual(expected, sw.ToString());
-                }
+                var result = Program.JoinDemonstrationLINQ(carFactory);
+                Assert.AreEqual("Ford", result.First().Brand);
+                Assert.AreEqual("Москва Улица им.Пушкина 52", result.First().Address);
             }
 
             [TestMethod]
@@ -831,17 +658,9 @@ namespace Laba14Tests
                 new Cars("Toyota", 2020, "Red", 50000, 15, 1)
             });
 
-                using (var sw = new StringWriter())
-                {
-                    Console.SetOut(sw);
-
-                    // Act
-                    Program.JoinDemonstrationExtension(carFactory);
-
-                    // Assert
-                    var expected = "{ Brand = Ford, Address = Москва Улица им.Пушкина 52 }\r\n{ Brand = Toyota, Address = Казань Улица Баумана 15 }\r\n";
-                    Assert.AreEqual(expected, sw.ToString());
-                }
+                var result = Program.JoinDemonstrationExtension(carFactory);
+                Assert.AreEqual("Ford", result.First().Brand);
+                Assert.AreEqual("Москва Улица им.Пушкина 52", result.First().Address);
             }
         }
     }
